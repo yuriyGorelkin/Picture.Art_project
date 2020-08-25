@@ -4454,21 +4454,32 @@ __webpack_require__.r(__webpack_exports__);
 
 
 var accordion = function accordion(triggerSelector, itemsSelector) {
-  var btns = document.querySelectorAll(triggerSelector),
-      blocks = document.querySelectorAll(itemsSelector);
-  blocks.forEach(function (block) {
-    return block.classList.add('animated', 'fadeInUp');
-  });
+  var btns = document.querySelectorAll(triggerSelector);
   btns.forEach(function (btn) {
     btn.addEventListener('click', function () {
-      if (!this.classList.contains('active')) {
-        btns.forEach(function (btn) {
-          btn.classList.remove('active', 'active-style');
-        });
-        this.classList.add('active', 'active-style');
+      this.classList.toggle('active-style');
+      this.nextElementSibling.classList.toggle('active-content');
+
+      if (this.classList.contains('active-style')) {
+        this.nextElementSibling.style.maxHeight = this.nextElementSibling.scrollHeight + 80 + 'px';
+      } else {
+        this.nextElementSibling.style.maxHeight = '0px';
       }
     });
   });
+  /*Вариант основанный на добавлении классов из CSS */
+  //       blocks = document.querySelectorAll(itemsSelector)
+  // blocks.forEach(block => block.classList.add('animated', 'fadeInUp'))
+  // btns.forEach(btn => {
+  //     btn.addEventListener('click', function() {
+  //         if (!this.classList.contains('active')) {
+  //             btns.forEach(btn => {
+  //                 btn.classList.remove('active', 'active-style')                    
+  //             })
+  //             this.classList.add('active', 'active-style')
+  //         }
+  //     })
+  // })
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (accordion);
