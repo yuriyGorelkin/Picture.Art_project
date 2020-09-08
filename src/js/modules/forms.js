@@ -28,6 +28,7 @@ const forms = () => {
 
     upload.forEach(item => {
         item.addEventListener('input', () => {
+            console.log(item.files[0])
             let dots
             const arr = item.files[0].name.split('.')
             arr[0].length > 6 ? dots = '...' : dots = '.'
@@ -60,7 +61,8 @@ const forms = () => {
 
             const formData = new FormData(item)  
             let api
-            item.closest('.popup-design') || item.classList.contains('calc_form') ? api = path.desiner : api = path.question
+            item.closest('.popup-design') || item.classList.contains('calc_form') ? api = path.desiner :
+            api = path.question
             console.log(api)
 
             postData(api, formData)
@@ -74,7 +76,7 @@ const forms = () => {
                     statusText.textContent = message.failure
                 })
                 .finally(() => {
-                    clearInputs()
+                    clearInputs();
                     setTimeout(() => {
                         statusMessage.remove()
                         item.style.display = 'block'
